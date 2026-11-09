@@ -59,11 +59,6 @@
 ### 📊 GitHub stats
 
 <p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=davidserreira&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&border_radius=10&bg_color=0F1B2D&title_color=8FA8D6&text_color=E6EDF3&icon_color=8FA8D6&rank_icon=github" alt="GitHub stats" />
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=davidserreira&layout=compact&langs_count=6&hide_border=true&border_radius=10&bg_color=0F1B2D&title_color=8FA8D6&text_color=E6EDF3" alt="Top languages" />
-</p>
-
-<p align="center">
   <img src="https://streak-stats.demolab.com?user=davidserreira&hide_border=true&border_radius=10&background=0F1B2D&ring=8FA8D6&fire=8FA8D6&currStreakLabel=8FA8D6&sideLabels=E6EDF3&currStreakNum=FFFFFF&sideNums=FFFFFF&dates=8B9BB4&stroke=2E4570" alt="GitHub streak" />
 </p>
 
