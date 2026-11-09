@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="440" viewBox="0 0 1000 440" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>David Serreira: MSc student in Informatics Engineering. From Faro (BSc, University of Algarve) to Braga (MSc, University of Minho).</title>
+  <!-- left: identity -->
+  <g>
+    <text x="40" y="150" fill="#0F1B2D" font-size="64" font-weight="700" letter-spacing="-1.8">David Serreira
+      <animate attributeName="opacity" from="0" to="1" dur="0.9s" fill="freeze"/>
+    </text>
+    <text x="43" y="190" fill="#2E4570" font-size="21" font-weight="500">MSc Student · Informatics Engineering
+      <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.4;1" dur="1.4s" fill="freeze"/>
+    </text>
+    <line x1="43" y1="228" x2="43" y2="228" stroke="#B9C7E0" stroke-width="1.5">
+      <animate attributeName="x2" from="43" to="560" begin="0.6s" dur="1.4s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.2 0.8 0.2 1"/>
+    </line>
+    <!-- two stops -->
+    <g font-size="15">
+      <text x="43" y="276" fill="#5B6B82" font-size="12" font-weight="600" letter-spacing="2.2">2022 – 2025 · FARO</text>
+      <text x="43" y="300" fill="#0F1B2D" font-weight="600">BSc in Informatics Engineering</text>
+      <text x="43" y="321" fill="#5B6B82">University of Algarve</text>
+
+      <text x="323" y="276" fill="#2E4570" font-size="12" font-weight="600" letter-spacing="2.2">2026 – 2028 · BRAGA</text>
+      <text x="323" y="300" fill="#0F1B2D" font-weight="600">MSc in Informatics Engineering</text>
+      <text x="323" y="321" fill="#5B6B82">University of Minho</text>
+      <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.6;1" dur="2s" fill="freeze"/>
+    </g>
+  </g>
+
+  <!-- right: map with the line south to north -->
+  <polygon points="778.7,51.1 785.1,44.1 797.6,36.4 814.8,31.5 821.3,40.6 813.7,48.3 831.0,52.5 841.8,49.0 855.3,54.6 869.8,50.4 880.6,45.5 901.1,46.2 905.4,51.1 903.8,64.4 923.2,72.1 916.2,84.0 907.6,93.1 898.4,95.2 890.3,109.2 883.3,109.9 890.3,122.5 889.2,140.0 890.9,156.8 887.1,163.1 879.0,168.7 884.9,180.6 886.5,191.1 878.5,205.1 851.0,205.8 863.4,219.1 872.0,240.1 881.7,249.9 877.9,260.4 865.5,271.6 862.3,290.5 874.1,308.7 883.3,307.3 879.5,320.6 866.1,323.4 852.0,353.5 857.4,379.4 831.5,394.1 814.8,386.4 789.5,385.7 774.4,392.7 771.7,389.9 779.2,371.0 783.0,341.6 778.1,325.5 782.5,308.0 784.1,292.6 776.0,287.7 759.8,293.3 762.0,275.8 745.8,273.0 744.7,266.7 749.0,254.1 753.9,238.0 749.6,226.1 767.9,210.0 777.1,178.5 778.7,169.4 785.1,137.2 790.0,115.5 788.9,101.5 783.5,82.6 780.3,63.7" fill="#F3F6FB" stroke="#B9C7E0" stroke-width="1.5" stroke-linejoin="round"/>
+  <path id="route" d="M 829.4 390.6 C 826.5 388.5, 817.2 386.5, 812.1 378.0 C 807.0 369.5, 801.8 351.2, 798.6 339.5 C 795.5 327.8, 796.9 318.3, 793.2 308.0 C 789.6 297.7, 781.0 284.6, 776.5 277.9 C 772.0 271.2, 764.6 275.0, 766.3 268.1 C 768.0 261.2, 781.1 244.7, 786.8 236.6 C 792.4 228.6, 799.4 227.9, 800.3 219.8 C 801.1 211.8, 791.3 197.1, 791.6 188.3 C 792.0 179.6, 802.5 175.8, 802.4 167.3 C 802.3 158.8, 792.6 148.2, 791.1 137.2 C 789.6 126.2, 791.3 112.1, 793.2 101.5 C 795.2 90.9, 801.3 78.2, 802.9 73.5" fill="none" stroke="#2E4570" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="2000" stroke-dashoffset="2000" pathLength="2000">
+    <animate attributeName="stroke-dashoffset" from="2000" to="0" begin="0.8s" dur="3.2s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1"/>
+  </path>
+  <g opacity="0"><circle cx="766.3" cy="268.1" r="2.6" fill="#F3F6FB" stroke="#B9C7E0" stroke-width="1.4"/><circle cx="802.4" cy="167.3" r="2.6" fill="#F3F6FB" stroke="#B9C7E0" stroke-width="1.4"/><circle cx="793.2" cy="101.5" r="2.6" fill="#F3F6FB" stroke="#B9C7E0" stroke-width="1.4"/>
+    <animate attributeName="opacity" from="0" to="1" begin="3.2s" dur="0.6s" fill="freeze"/>
+  </g>
+  <!-- train: travels the line, repeating -->
+  <circle r="4.5" fill="#0F1B2D" opacity="0">
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" begin="4.4s" dur="6s" repeatCount="indefinite"/>
+    <animateMotion begin="4.4s" dur="6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.3 1"><mpath xlink:href="#route"/></animateMotion>
+  </circle>
+  <!-- Faro -->
+  <circle cx="829.4" cy="390.6" r="5.5" fill="#F3F6FB" stroke="#5B6B82" stroke-width="2.2"/>
+  <text x="845.4" y="412.6" fill="#5B6B82" font-size="12" font-weight="600" letter-spacing="2.2">FARO</text>
+  <!-- Braga -->
+  <circle cx="802.9" cy="73.5" r="6" fill="none" stroke="#2E4570" stroke-width="1.5" opacity="0">
+    <animate attributeName="r" values="6;18" begin="4s" dur="2.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0" begin="4s" dur="2.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="802.9" cy="73.5" r="5.5" fill="#2E4570" stroke="#F3F6FB" stroke-width="2"/>
+  <text x="820.9" y="77.5" fill="#2E4570" font-size="12" font-weight="600" letter-spacing="2.2">BRAGA</text>
+</svg>
