@@ -26,7 +26,7 @@ I build web applications and I'm interested in software quality, formal methods 
 <br />
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/davidserreira"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/LinkedIn-2E4570?style=for-the-badge&logo=linkedin&logoColor=white" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/LinkedIn-0F1B2D?style=for-the-badge&logo=linkedin&logoColor=white" /><img src="https://img.shields.io/badge/LinkedIn-2E4570?style=for-the-badge&logo=linkedin&logoColor=white" height="34" alt="LinkedIn" /></picture></a>
-  &nbsp;
-  <a href="mailto:davidserreira@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/Email-2E4570?style=for-the-badge&logo=gmail&logoColor=white" /><source media="(prefers-color-scheme: light)" srcset="https://img.shields.io/badge/Email-0F1B2D?style=for-the-badge&logo=gmail&logoColor=white" /><img src="https://img.shields.io/badge/Email-2E4570?style=for-the-badge&logo=gmail&logoColor=white" height="34" alt="Email" /></picture></a>
+  <a href="https://www.linkedin.com/in/davidserreira"><picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=linkedin&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=linkedin&theme=light" /><img src="https://skillicons.dev/icons?i=linkedin&theme=dark" height="44" alt="LinkedIn" /></picture></a>
+  &nbsp;&nbsp;
+  <a href="mailto:davidserreira@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=gmail&theme=dark" /><source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=gmail&theme=light" /><img src="https://skillicons.dev/icons?i=gmail&theme=dark" height="44" alt="Email" /></picture></a>
 </p>
