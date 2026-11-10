@@ -125,7 +125,7 @@ CARDS = [
          tags=["React", "TypeScript", "Express", "SQLite"], link=True, shot="casacota-shot.jpg"),
     dict(slug="faroliga", label="PERSONAL PROJECT", status="live", title="Faro Liga",
          text="Points league that turns a store team's sales into a weekly podium.",
-         tags=["React", "TypeScript", "Express", "Tailwind"], link=True),
+         tags=["React", "TypeScript", "Express", "Tailwind"], link=False),
     dict(slug="marcaqui", label="CLIENT WORK", status="private", title="Marcaqui",
          text="Online booking for a barbershop: schedule, clients and reminders.",
          tags=["React", "TypeScript", "PHP", "SQL"], link=False),
