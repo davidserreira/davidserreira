@@ -108,69 +108,40 @@ def hero(t):
 </svg>
 '''
 
-# One entry per card in "Selected work". Add a project here, run the script and
-# reference assets/<slug>-dark.svg and assets/<slug>-light.svg from the README.
-#   status: "live" (green pulse), "progress" (accent pulse) or "private" (no dot)
-#   link:   True draws the arrow; use it when the README wraps the card in a link
-#   shot:   optional screenshot in assets/, shown on the right of the card
-CARDS = [
-    dict(slug="vetstock", label="TEAM PROJECT", status="live", title="VetStock",
+# "Selected work": one column per project, a real screenshot on top and two
+# lines of text below. Screenshots live in assets/shots/ (740x480 JPEG).
+WORK = [
+    dict(shot="vetstock.jpg", title="VetStock",
          text="Purchasing and stock management for a veterinary clinic.",
-         tags=["React", "TypeScript", "Node.js", "PostgreSQL", "Prisma", "Docker"], link=True),
-    dict(slug="picturas", label="MSC · TEAM PROJECT", status="progress", title="PictuRAS",
-         text="Image and video editor with AI tools, built as microservices.",
-         tags=["TypeScript", "Python", "RabbitMQ", "Docker"], link=True),
-    dict(slug="casacota", label="PERSONAL PROJECT", status="live", title="Casa Cota",
-         text="Shared-house chores: calendar, stats and a roulette.",
-         tags=["React", "TypeScript", "Express", "SQLite"], link=True, shot="casacota-shot.jpg"),
-    dict(slug="faroliga", label="PERSONAL PROJECT", status="live", title="Faro Liga",
-         text="Points league that turns a store team's sales into a weekly podium.",
-         tags=["React", "TypeScript", "Express", "Tailwind"], link=False),
-    dict(slug="marcaqui", label="CLIENT WORK", status="private", title="Marcaqui",
-         text="Online booking for a barbershop: schedule, clients and reminders.",
-         tags=["React", "TypeScript", "PHP", "SQL"], link=False),
-    dict(slug="sdvm", label="MSC · TEAM PROJECT", status="private", title="SDVM Parser",
-         text="Parser and AST for the SDVM language, with grammar extensions.",
-         tags=["Python", "Parsing", "Testing"], link=False),
+         stack="React · Node.js · PostgreSQL"),
+    dict(shot="casacota.jpg", title="Casa Cota",
+         text="Chores calendar for a shared house, with stats.",
+         stack="React · Express · SQLite"),
+    dict(shot="faroliga.jpg", title="Faro Liga",
+         text="A points league for a store team's weekly sales.",
+         stack="React · Express · Tailwind"),
 ]
-STATUS = {"live": "LIVE", "progress": "IN PROGRESS", "private": "PRIVATE"}
 
 
-def card(t, c):
-    W, H = 600, 210
-    x, tags = 34, ""
-    for s in c["tags"]:
-        w = 9 + len(s) * 7.1 + 9
-        tags += f'<rect x="{x:.0f}" y="150" width="{w:.0f}" height="24" rx="12" fill="none" stroke="{t["line"]}" stroke-width="1.2"/><text x="{x+w/2:.1f}" y="166.5" text-anchor="middle" fill="{t["sub"]}" font-size="12">{s}</text>'
-        x += w + 7
-    status_x, dot = W - 34, ""
-    if c["status"] != "private":
-        colour = t["live"] if c["status"] == "live" else t["accent"]
-        dot = f'<circle cx="{W-38}" cy="46" r="4" fill="{colour}"><animate attributeName="opacity" values="1;0.35;1" dur="2s" repeatCount="indefinite"/></circle>'
-        status_x = W - 50
-    arrow = f'<text x="{W-34}" y="92" text-anchor="end" fill="{t["accent"]}" font-size="20">↗</text>' if c["link"] else ""
-    shot = ""
-    if c.get("shot"):
-        # the status moves left and the arrow goes away to make room for the picture
-        data = base64.b64encode(open(os.path.join(OUT, c["shot"]), "rb").read()).decode()
-        sw, sh, sx, sy = 146, 178, W - 146 - 16, 16
-        shot = (f'<clipPath id="shot"><rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="10"/></clipPath>'
-                f'<image href="data:image/jpeg;base64,{data}" x="{sx}" y="{sy}" width="{sw}" height="{sh}" preserveAspectRatio="xMidYMin slice" clip-path="url(#shot)"/>'
-                f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="10" fill="none" stroke="{t["line"]}" stroke-width="1.2"/>')
-        arrow = ""
-        dot = dot.replace(f'cx="{W-38}"', f'cx="{sx-20}"')
-        status_x = sx - 32
+def work(t):
+    W, col, gap, img_h = 1200, 376, 36, 244
+    H = img_h + 120
+    parts = []
+    for k, p in enumerate(WORK):
+        x = k * (col + gap)
+        data = base64.b64encode(open(os.path.join(OUT, "shots", p["shot"]), "rb").read()).decode()
+        parts.append(f"""
+  <g>
+    <clipPath id="c{k}"><rect x="{x}" y="0" width="{col}" height="{img_h}" rx="8"/></clipPath>
+    <image href="data:image/jpeg;base64,{data}" x="{x}" y="0" width="{col}" height="{img_h}" preserveAspectRatio="xMidYMid slice" clip-path="url(#c{k})"/>
+    <rect x="{x+0.5}" y="0.5" width="{col-1}" height="{img_h-1}" rx="8" fill="none" stroke="{t["line"]}"/>
+    <text x="{x}" y="{img_h+38}" fill="{t["text"]}" font-size="21" font-weight="600">{p["title"]}</text>
+    <text x="{x}" y="{img_h+66}" fill="{t["muted"]}" font-size="15">{p["text"]}</text>
+    <text x="{x}" y="{img_h+92}" fill="{t["sub"]}" font-size="13.5">{p["stack"]}</text>
+  </g>""")
+    alt = " ".join(f'{p["title"]}: {p["text"]}' for p in WORK)
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">
-  <title>{c["title"]}: {c["text"]}</title>
-  <rect x="1" y="1" width="{W-2}" height="{H-2}" rx="14" fill="{t["land"]}" stroke="{t["line"]}" stroke-width="1.5"/>
-  <text x="34" y="50" fill="{t["muted"]}" font-size="11.5" font-weight="600" letter-spacing="2.4">{c["label"]}</text>
-  {dot}
-  <text x="{status_x}" y="50" text-anchor="end" fill="{t["muted"]}" font-size="11.5" font-weight="600" letter-spacing="2.4">{STATUS[c["status"]]}</text>
-  <text x="34" y="92" fill="{t["text"]}" font-size="30" font-weight="700" letter-spacing="-0.6">{c["title"]}</text>
-  <text x="34" y="122" fill="{t["muted"]}" font-size="14.5">{c["text"]}</text>
-  {tags}
-  {arrow}
-  {shot}
+  <title>{alt}</title>{"".join(parts)}
 </svg>
 """
 
@@ -178,7 +149,6 @@ def card(t, c):
 for name, t in THEMES.items():
     with open(f"{OUT}/hero-{name}.svg", "w", encoding="utf-8") as f:
         f.write(hero(t))
-    for c in CARDS:
-        with open(f"{OUT}/{c['slug']}-{name}.svg", "w", encoding="utf-8") as f:
-            f.write(card(t, c))
-print("Wrote", ", ".join(sorted(os.listdir(OUT))))
+    with open(f"{OUT}/work-{name}.svg", "w", encoding="utf-8") as f:
+        f.write(work(t))
+print("Wrote hero and work SVGs to", os.path.normpath(OUT))
