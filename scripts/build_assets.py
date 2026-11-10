@@ -108,35 +108,58 @@ def hero(t):
 </svg>
 '''
 
-def card(t, kind):
+# One entry per card in "Selected work". Add a project here, run the script and
+# reference assets/<slug>-dark.svg and assets/<slug>-light.svg from the README.
+#   status: "live" (green pulse), "progress" (accent pulse) or "private" (no dot)
+#   link:   True draws the arrow; use it when the README wraps the card in a link
+CARDS = [
+    dict(slug="vetstock", label="TEAM PROJECT", status="live", title="VetStock",
+         text="Purchasing and stock management for a veterinary clinic.",
+         tags=["React", "TypeScript", "Node.js", "PostgreSQL", "Prisma", "Docker"], link=True),
+    dict(slug="picturas", label="MSC · TEAM PROJECT", status="progress", title="PictuRAS",
+         text="Image and video editor with AI tools, built as microservices.",
+         tags=["TypeScript", "Python", "RabbitMQ", "Docker"], link=True),
+    dict(slug="marcaqui", label="CLIENT WORK", status="private", title="Marcaqui",
+         text="Online booking for a barbershop: schedule, clients and reminders.",
+         tags=["React", "TypeScript", "PHP", "SQL"], link=False),
+    dict(slug="sdvm", label="MSC · TEAM PROJECT", status="private", title="SDVM Parser",
+         text="Parser and AST for the SDVM language, with grammar extensions.",
+         tags=["Python", "Parsing", "Testing"], link=False),
+]
+STATUS = {"live": "LIVE", "progress": "IN PROGRESS", "private": "PRIVATE"}
+
+
+def card(t, c):
     W, H = 600, 210
-    if kind == "slot":
-        return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">
-  <rect x="1" y="1" width="{W-2}" height="{H-2}" rx="14" fill="none" stroke="{t["line"]}" stroke-width="1.5" stroke-dasharray="5 7"/>
-  <text x="{W/2}" y="{H/2+5}" text-anchor="middle" fill="{t["muted"]}" font-size="13" font-weight="600" letter-spacing="2.4">MORE SOON</text>
-</svg>
-'''
-    tags = ["React", "TypeScript", "Node.js", "PostgreSQL", "Prisma", "Docker"]
-    x, tg = 34, ""
-    for s in tags:
+    x, tags = 34, ""
+    for s in c["tags"]:
         w = 9 + len(s) * 7.1 + 9
-        tg += f'<rect x="{x}" y="150" width="{w:.0f}" height="24" rx="12" fill="none" stroke="{t["line"]}" stroke-width="1.2"/><text x="{x+w/2:.1f}" y="166.5" text-anchor="middle" fill="{t["sub"]}" font-size="12">{s}</text>'
+        tags += f'<rect x="{x:.0f}" y="150" width="{w:.0f}" height="24" rx="12" fill="none" stroke="{t["line"]}" stroke-width="1.2"/><text x="{x+w/2:.1f}" y="166.5" text-anchor="middle" fill="{t["sub"]}" font-size="12">{s}</text>'
         x += w + 7
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">
-  <title>VetStock: purchasing and stock management platform for a veterinary clinic</title>
+    status_x, dot = W - 34, ""
+    if c["status"] != "private":
+        colour = t["live"] if c["status"] == "live" else t["accent"]
+        dot = f'<circle cx="{W-38}" cy="46" r="4" fill="{colour}"><animate attributeName="opacity" values="1;0.35;1" dur="2s" repeatCount="indefinite"/></circle>'
+        status_x = W - 50
+    arrow = f'<text x="{W-34}" y="92" text-anchor="end" fill="{t["accent"]}" font-size="20">↗</text>' if c["link"] else ""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">
+  <title>{c["title"]}: {c["text"]}</title>
   <rect x="1" y="1" width="{W-2}" height="{H-2}" rx="14" fill="{t["land"]}" stroke="{t["line"]}" stroke-width="1.5"/>
-  <text x="34" y="50" fill="{t["muted"]}" font-size="11.5" font-weight="600" letter-spacing="2.4">TEAM PROJECT</text>
-  <circle cx="{W-38}" cy="46" r="4" fill="{t["live"]}"><animate attributeName="opacity" values="1;0.35;1" dur="2s" repeatCount="indefinite"/></circle>
-  <text x="{W-50}" y="50" text-anchor="end" fill="{t["muted"]}" font-size="11.5" font-weight="600" letter-spacing="2.4">LIVE</text>
-  <text x="34" y="92" fill="{t["text"]}" font-size="30" font-weight="700" letter-spacing="-0.6">VetStock</text>
-  <text x="34" y="122" fill="{t["muted"]}" font-size="14.5">Purchasing and stock management for a veterinary clinic.</text>
-  {tg}
-  <text x="{W-34}" y="92" text-anchor="end" fill="{t["accent"]}" font-size="20">↗</text>
+  <text x="34" y="50" fill="{t["muted"]}" font-size="11.5" font-weight="600" letter-spacing="2.4">{c["label"]}</text>
+  {dot}
+  <text x="{status_x}" y="50" text-anchor="end" fill="{t["muted"]}" font-size="11.5" font-weight="600" letter-spacing="2.4">{STATUS[c["status"]]}</text>
+  <text x="34" y="92" fill="{t["text"]}" font-size="30" font-weight="700" letter-spacing="-0.6">{c["title"]}</text>
+  <text x="34" y="122" fill="{t["muted"]}" font-size="14.5">{c["text"]}</text>
+  {tags}
+  {arrow}
 </svg>
-'''
+"""
+
 
 for name, t in THEMES.items():
-    open(f"{OUT}/hero-{name}.svg", "w").write(hero(t))
-    open(f"{OUT}/vetstock-{name}.svg", "w").write(card(t, "vetstock"))
-    open(f"{OUT}/slot-{name}.svg", "w").write(card(t, "slot"))
+    with open(f"{OUT}/hero-{name}.svg", "w", encoding="utf-8") as f:
+        f.write(hero(t))
+    for c in CARDS:
+        with open(f"{OUT}/{c['slug']}-{name}.svg", "w", encoding="utf-8") as f:
+            f.write(card(t, c))
 print("Wrote", ", ".join(sorted(os.listdir(OUT))))
