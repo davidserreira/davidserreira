@@ -9,7 +9,7 @@ only. Run it after changing the text, the colours or the list of cards:
 
 The activity ring is drawn separately by scripts/activity.py.
 """
-import math, os
+import base64, math, os
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets")
 os.makedirs(OUT, exist_ok=True)
 
@@ -112,6 +112,7 @@ def hero(t):
 # reference assets/<slug>-dark.svg and assets/<slug>-light.svg from the README.
 #   status: "live" (green pulse), "progress" (accent pulse) or "private" (no dot)
 #   link:   True draws the arrow; use it when the README wraps the card in a link
+#   shot:   optional screenshot in assets/, shown on the right of the card
 CARDS = [
     dict(slug="vetstock", label="TEAM PROJECT", status="live", title="VetStock",
          text="Purchasing and stock management for a veterinary clinic.",
@@ -119,6 +120,12 @@ CARDS = [
     dict(slug="picturas", label="MSC · TEAM PROJECT", status="progress", title="PictuRAS",
          text="Image and video editor with AI tools, built as microservices.",
          tags=["TypeScript", "Python", "RabbitMQ", "Docker"], link=True),
+    dict(slug="casacota", label="PERSONAL PROJECT", status="live", title="Casa Cota",
+         text="Shared-house chores: calendar, stats and a roulette.",
+         tags=["React", "TypeScript", "Express", "SQLite"], link=True, shot="casacota-shot.jpg"),
+    dict(slug="faroliga", label="PERSONAL PROJECT", status="live", title="Faro Liga",
+         text="Points league that turns a store team's sales into a weekly podium.",
+         tags=["React", "TypeScript", "Express", "Tailwind"], link=True),
     dict(slug="marcaqui", label="CLIENT WORK", status="private", title="Marcaqui",
          text="Online booking for a barbershop: schedule, clients and reminders.",
          tags=["React", "TypeScript", "PHP", "SQL"], link=False),
@@ -142,6 +149,17 @@ def card(t, c):
         dot = f'<circle cx="{W-38}" cy="46" r="4" fill="{colour}"><animate attributeName="opacity" values="1;0.35;1" dur="2s" repeatCount="indefinite"/></circle>'
         status_x = W - 50
     arrow = f'<text x="{W-34}" y="92" text-anchor="end" fill="{t["accent"]}" font-size="20">↗</text>' if c["link"] else ""
+    shot = ""
+    if c.get("shot"):
+        # the status moves left and the arrow goes away to make room for the picture
+        data = base64.b64encode(open(os.path.join(OUT, c["shot"]), "rb").read()).decode()
+        sw, sh, sx, sy = 146, 178, W - 146 - 16, 16
+        shot = (f'<clipPath id="shot"><rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="10"/></clipPath>'
+                f'<image href="data:image/jpeg;base64,{data}" x="{sx}" y="{sy}" width="{sw}" height="{sh}" preserveAspectRatio="xMidYMin slice" clip-path="url(#shot)"/>'
+                f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="10" fill="none" stroke="{t["line"]}" stroke-width="1.2"/>')
+        arrow = ""
+        dot = dot.replace(f'cx="{W-38}"', f'cx="{sx-20}"')
+        status_x = sx - 32
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="{FONT}">
   <title>{c["title"]}: {c["text"]}</title>
   <rect x="1" y="1" width="{W-2}" height="{H-2}" rx="14" fill="{t["land"]}" stroke="{t["line"]}" stroke-width="1.5"/>
@@ -152,6 +170,7 @@ def card(t, c):
   <text x="34" y="122" fill="{t["muted"]}" font-size="14.5">{c["text"]}</text>
   {tags}
   {arrow}
+  {shot}
 </svg>
 """
 
